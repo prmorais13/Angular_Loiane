@@ -38,7 +38,7 @@
       <div class="col-sm-3" [ngClass]="aplicaCssErro(cep)">
         <label for="cep" class="control-label">CEP</label>
         <input type="text" class="form-control" id="cep" name="cep" ngModel required #cep="ngModel"
-          (blur)="consultaCEP($event.target.value)">
+          (blur)="consultaCEP($event.target.value, f)">
 
         <app-campo-control-erro
             [mostrarErro]="verificaValidTaouched(cep)"
