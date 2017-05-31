@@ -6,13 +6,12 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DataFormComponent } from './data-form/data-form.component';
 import { TemplateFormModule } from './template-form/template-form.module';
+import { DataFormModule } from './data-form/data-form.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DataFormComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -20,6 +19,7 @@ import { TemplateFormModule } from './template-form/template-form.module';
     HttpModule,
     TemplateFormModule,
     AppRoutingModule,
+    DataFormModule,
     BsDropdownModule.forRoot()
   ],
   providers: [],
