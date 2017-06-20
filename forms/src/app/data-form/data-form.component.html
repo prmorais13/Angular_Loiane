@@ -1,10 +1,10 @@
 <form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()" >
-  
+
   <div class="form-group">
     <div class="col-sm-12">
       <label class="control-label" for="nome">Nome</label>
     </div>
-    
+
     <div class="col-sm-12">
       <input type="text" class="form-control" id="nome" placeholder="nome"
         formControlName="nome">
@@ -23,5 +23,6 @@
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn" (click)="resetar()">Cancelar</button>
     <app-form-debug [form]="formulario"></app-form-debug>
 </form>
