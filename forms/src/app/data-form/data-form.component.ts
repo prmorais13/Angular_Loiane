@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
+import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 import { Http } from '@angular/http';
 
 @Component({
@@ -22,25 +22,44 @@ export class DataFormComponent implements OnInit {
     });*/
 
     this.formulario = this.formBuilder.group({
-      nome: [null],
-      email: [null]
+      nome: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]]
     });
   }
 
   onSubmit(){
-    console.log(this.formulario.value);
+    console.log(this.formulario);
     this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
       .map(res => res)
       .subscribe(dados => {
         console.log(dados);
         //this.formulario.reset();
-        this.resetar();
+        //this.resetar();
       },
       (erro: any) => alert('Erro'));
   }
 
   resetar(){
     this.formulario.reset();
+  }
+
+  verificaValidTaouched(campo){
+   return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+  }
+
+  verificaEmailInvalido(){
+    let campoEmail = this.formulario.get('email');
+
+    if(campoEmail.errors){
+      return campoEmail.errors['email'] && campoEmail.touched;
+    }
+  }
+
+  aplicaCssErro(campo){
+    return {
+      'has-error': this.verificaValidTaouched(campo),
+      'has-feedback': this.verificaValidTaouched(campo)
+    }
   }
 
 }
