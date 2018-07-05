@@ -1,5 +1,7 @@
+
+import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { Http } from "@angular/http";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-template-form',
@@ -13,56 +15,55 @@ export class TemplateFormComponent implements OnInit {
     email: null
   }
 
-  onSubmit(formulario){
+  onSubmit(formulario) {
     console.log(formulario);
-    //console.log(this.usuario);
+    // console.log(this.usuario);
 
-    this.http.post('https://httpbin.org/post', JSON.stringify(formulario.value))
-      .map(res => res)
+    this.http.post('https://httpbin.org/post', JSON.stringify(formulario.value)).pipe(
+      map(res => res))
       .subscribe(dados => {
         console.log(dados);
         formulario.form.reset();
       });
   }
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
 
-  verificaValidTaouched(campo){
+  verificaValidTaouched(campo) {
     return !campo.valid && campo.touched;
   }
 
-  aplicaCssErro(campo){
+  aplicaCssErro(campo) {
     return {
       'has-error': this.verificaValidTaouched(campo),
       'has-feedback': this.verificaValidTaouched(campo)
     }
   }
 
-  consultaCEP(cep, form){
-    //Nova variável "cep" somente com dígitos.
+  consultaCEP(cep, form) {
+    // Nova variável "cep" somente com dígitos.
     cep = cep.replace(/\D/g, '');
 
-    //Verifica se campo cep possui valor informado.
-    if (cep != "") {
-      //Expressão regular para validar o CEP.
-      var validacep = /^[0-9]{8}$/;
+    // Verifica se campo cep possui valor informado.
+    if (cep !== '') {
+      // Expressão regular para validar o CEP.
+      const validacep = /^[0-9]{8}$/;
 
-      //Valida o formato do CEP.
-      if(validacep.test(cep)) {
+      // Valida o formato do CEP.
+      if (validacep.test(cep)) {
 
         this.resetaDadosForm(form);
-        //this.http.get("//viacep.com.br/ws/"+ cep +"/json/")
+        // this.http.get("//viacep.com.br/ws/"+ cep +"/json/")
         this.http.get(`//viacep.com.br/ws/${cep}/json/`)
-            .map(dados => dados.json())
-            .subscribe(dados => this.populaDadosForm(dados, form));
+          .subscribe(dados => this.populaDadosForm(dados, form));
       }
     }
   }
 
-  populaDadosForm(dados, formulario){
+  populaDadosForm(dados, formulario) {
     /*formulario.setValue({
       nome: formulario.value.nome,
       email: formulario.value.email,
@@ -80,7 +81,7 @@ export class TemplateFormComponent implements OnInit {
     formulario.form.patchValue({
       endereco: {
         rua: dados.logradouro,
-        //cep: dados.cep ,
+        // cep: dados.cep ,
         complemento: dados.complemento,
         bairro: dados.bairro,
         cidade: dados.localidade,
@@ -89,7 +90,7 @@ export class TemplateFormComponent implements OnInit {
     });
   }
 
-  resetaDadosForm(formulario){
+  resetaDadosForm(formulario) {
     formulario.form.patchValue({
       endereco: {
         rua: null,

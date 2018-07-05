@@ -1,6 +1,8 @@
+
+import {map} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { EstadoBr } from '../shared/models/estado-br.models';
 import { DropdownService } from '../shared/services/dropdown.service';
@@ -17,7 +19,7 @@ export class DataFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: Http,
+    private http: HttpClient,
     private dropdownServices: DropdownService) { }
 
   ngOnInit() {
@@ -53,7 +55,6 @@ export class DataFormComponent implements OnInit {
     if (this.formulario.valid) {
       console.log(this.formulario);
       this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
-        .map(res => res)
         .subscribe(dados => {
           console.log(dados);
           // this.formulario.reset();
@@ -119,7 +120,6 @@ export class DataFormComponent implements OnInit {
         this.resetaDadosForm();
         // this.http.get("//viacep.com.br/ws/"+ cep +"/json/")
         this.http.get(`//viacep.com.br/ws/${cep}/json/`)
-          .map(dados => dados.json())
           .subscribe(dados => this.populaDadosForm(dados));
       }
     }
