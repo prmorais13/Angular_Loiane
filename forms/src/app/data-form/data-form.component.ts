@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Http } from '@angular/http';
+
+import { EstadoBr } from '../shared/models/estado-br.models';
+import { DropdownService } from '../shared/services/dropdown.service';
 
 @Component({
   selector: 'app-data-form',
@@ -10,16 +13,24 @@ import { Http } from '@angular/http';
 export class DataFormComponent implements OnInit {
 
   formulario: FormGroup;
+  estados: EstadoBr[];
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: Http) { }
+    private http: Http,
+    private dropdownServices: DropdownService) { }
 
   ngOnInit() {
     /*this.formulario = new FormGroup({
       nome: new FormControl(null),
       email: new FormControl(null),
     });*/
+
+    this.dropdownServices.getEstadosBr()
+      .subscribe(dados => {
+        this.estados = dados;
+        console.log(this.estados);
+      });
 
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
@@ -39,7 +50,7 @@ export class DataFormComponent implements OnInit {
 
   onSubmit() {
 
-    if (this.formulario.valid){
+    if (this.formulario.valid) {
       console.log(this.formulario);
       this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
         .map(res => res)
@@ -48,7 +59,7 @@ export class DataFormComponent implements OnInit {
           // this.formulario.reset();
           // this.resetar();
         },
-        (erro: any) => alert('Erro'));
+          (erro: any) => alert('Erro'));
     } else {
       console.log('Formulário inválido!');
       this.verificaValidacoesForm(this.formulario);
@@ -56,15 +67,15 @@ export class DataFormComponent implements OnInit {
   }
 
   verificaValidacoesForm(formGroup: FormGroup) {
-     Object.keys(formGroup.controls).forEach(campo => {
-        console.log(campo);
-        const controle = formGroup.get(campo);
-        controle.markAsDirty();
-        if (controle instanceof FormGroup) {
-          this.verificaValidacoesForm(controle);
-        }
+    Object.keys(formGroup.controls).forEach(campo => {
+      console.log(campo);
+      const controle = formGroup.get(campo);
+      controle.markAsDirty();
+      if (controle instanceof FormGroup) {
+        this.verificaValidacoesForm(controle);
+      }
 
-      });
+    });
   }
 
   resetar() {
@@ -72,14 +83,14 @@ export class DataFormComponent implements OnInit {
   }
 
   verificaValidTaouched(campo: string) {
-   return !this.formulario.get(campo).valid && (this.formulario.get(campo).touched ||
-          this.formulario.get(campo).dirty);
+    return !this.formulario.get(campo).valid && (this.formulario.get(campo).touched ||
+      this.formulario.get(campo).dirty);
   }
 
-  verificaEmailInvalido( ) {
+  verificaEmailInvalido() {
     const campoEmail = this.formulario.get('email');
 
-    if (campoEmail.errors){
+    if (campoEmail.errors) {
       return campoEmail.errors['email'] && campoEmail.touched;
     }
   }
@@ -108,8 +119,8 @@ export class DataFormComponent implements OnInit {
         this.resetaDadosForm();
         // this.http.get("//viacep.com.br/ws/"+ cep +"/json/")
         this.http.get(`//viacep.com.br/ws/${cep}/json/`)
-            .map(dados => dados.json())
-            .subscribe(dados => this.populaDadosForm(dados));
+          .map(dados => dados.json())
+          .subscribe(dados => this.populaDadosForm(dados));
       }
     }
   }

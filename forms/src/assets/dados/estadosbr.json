@@ -1,0 +1,135 @@
+[{
+"id": "1",
+"sigala": "AC",
+"nome": "Acre"
+},
+{
+"id": "2",
+"sigala": "AL",
+"nome": "Alagoas"
+},
+{
+"id": "3",
+"sigala": "AM",
+"nome": "Amazonas"
+},
+{
+"id": "4",
+"sigala": "AP",
+"nome": "Amapá"
+},
+{
+"id": "5",
+"sigala": "BA",
+"nome": "Bahia"
+},
+{
+"id": "6",
+"sigala": "CE",
+"nome": "Ceará"
+},
+{
+"id": "7",
+"sigala": "DF",
+"nome": "Distrito Federal"
+},
+{
+"id": "8",
+"sigala": "ES",
+"nome": "Espírito Santo"
+},
+{
+"id": "9",
+"sigala": "GO",
+"nome": "Goiás"
+},
+{
+"id": "10",
+"sigala": "MA",
+"nome": "Maranhão"
+},
+{
+"id": "11",
+"sigala": "MG",
+"nome": "Minas Gerais"
+},
+{
+"id": "12",
+"sigala": "MS",
+"nome": "Mato Grosso do Sul"
+},
+{
+"id": "13",
+"sigala": "MT",
+"nome": "Mato Grosso"
+},
+{
+"id": "14",
+"sigala": "PA",
+"nome": "Pará"
+},
+{
+"id": "15",
+"sigala": "PB",
+"nome": "Paraíba"
+},
+{
+"id": "16",
+"sigala": "PE",
+"nome": "Pernambuco"
+},
+{
+"id": "17",
+"sigala": "PI",
+"nome": "Piauí"
+},
+{
+"id": "18",
+"sigala": "PR",
+"nome": "Paraná"
+},
+{
+"id": "19",
+"sigala": "RJ",
+"nome": "Rio de Janeiro"
+},
+{
+"id": "20",
+"sigala": "RN",
+"nome": "Rio Grande do Norte"
+},
+{
+"id": "21",
+"sigala": "RO",
+"nome": "Rondônia"
+},
+{
+"id": "22",
+"sigala": "RR",
+"nome": "Roraima"
+},
+{
+"id": "23",
+"sigala": "RS",
+"nome": "Rio Grande do Sul"
+},
+{
+"id": "24",
+"sigala": "SC",
+"nome": "Santa Catarina"
+},
+{
+"id": "25",
+"sigala": "SE",
+"nome": "Sergipe"
+},
+{
+"id": "26",
+"sigala": "SP",
+"nome": "São Paulo"
+},
+{
+"id": "27",
+"sigala": "TO",
+"nome": "Tocantins"
+}]
