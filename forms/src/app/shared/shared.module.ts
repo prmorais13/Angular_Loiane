@@ -16,6 +16,7 @@ import { FormDebugComponent } from './form-debug/form-debug.component';
     CampoControlErroComponent
   ],
   exports: [
+    HttpClientModule,
     FormDebugComponent,
     CampoControlErroComponent
   ],

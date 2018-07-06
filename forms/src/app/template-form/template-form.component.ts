@@ -15,21 +15,20 @@ export class TemplateFormComponent implements OnInit {
     email: null
   }
 
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+  }
+
   onSubmit(formulario) {
     console.log(formulario);
     // console.log(this.usuario);
 
-    this.http.post('https://httpbin.org/post', JSON.stringify(formulario.value)).pipe(
-      map(res => res))
+    this.http.post('https://httpbin.org/post', JSON.stringify(formulario.value))
       .subscribe(dados => {
         console.log(dados);
         formulario.form.reset();
       });
-  }
-
-  constructor(private http: HttpClient) { }
-
-  ngOnInit() {
   }
 
   verificaValidTaouched(campo) {
